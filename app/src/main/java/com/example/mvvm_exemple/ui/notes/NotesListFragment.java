@@ -15,7 +15,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mvvm_exemple.R;
+import com.example.mvvm_exemple.data.repository.NotesRepository;
+import com.example.mvvm_exemple.ui.main.MainActivity;
 import com.example.mvvm_exemple.viewmodel.NotesViewModel;
+import com.example.mvvm_exemple.viewmodel.NotesViewModelFactory;
 
 public class NotesListFragment extends Fragment {
 
@@ -31,19 +34,18 @@ public class NotesListFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View v, @Nullable Bundle b) {
         RecyclerView rv = v.findViewById(R.id.recycler);
-
-
         rv.setLayoutManager(new LinearLayoutManager(requireContext()));
-        rv.setHasFixedSize(true);
-        rv.addItemDecoration(new DividerItemDecoration(requireContext(), RecyclerView.VERTICAL));
-
-
-
         adapter = new NotesAdapter();
         rv.setAdapter(adapter);
 
-        vm = new ViewModelProvider(requireActivity()).get(NotesViewModel.class);
+
+        NotesViewModelFactory factory = ((MainActivity) requireActivity()).getNotesFactory();
+
+
+        vm = new ViewModelProvider(requireActivity(), factory).get(NotesViewModel.class);
+
         vm.getNotes().observe(getViewLifecycleOwner(), adapter::submitList);
+
 
         v.findViewById(R.id.btnAdd).setOnClickListener(btn ->
                 NavHostFragment.findNavController(this)

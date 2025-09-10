@@ -7,11 +7,9 @@ import androidx.lifecycle.ViewModel;
 import com.example.mvvm_exemple.data.repository.NotesRepository;
 import com.example.mvvm_exemple.model.Note;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import java.util.Arrays;
-import java.util.List;
 
 public class NotesViewModel extends ViewModel {
     private final NotesRepository repo;
@@ -37,11 +35,11 @@ public class NotesViewModel extends ViewModel {
         repo.add(new Note(title, content));
     }
 
-    public void remove(Note note) {
-        repo.remove(note);
-    }
+
 
     public void removeByTitle(String title) {
         repo.removeByTitle(title);
     }
+
+
 }

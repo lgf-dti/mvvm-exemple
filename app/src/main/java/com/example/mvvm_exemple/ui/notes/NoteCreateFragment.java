@@ -14,7 +14,9 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.mvvm_exemple.R;
+import com.example.mvvm_exemple.ui.main.MainActivity;
 import com.example.mvvm_exemple.viewmodel.NotesViewModel;
+import com.example.mvvm_exemple.viewmodel.NotesViewModelFactory;
 
 public class NoteCreateFragment extends Fragment {
 
@@ -29,9 +31,14 @@ public class NoteCreateFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View v, @Nullable Bundle b) {
-        vm = new ViewModelProvider(requireActivity()).get(NotesViewModel.class);
         etTitle = v.findViewById(R.id.etTitle);
         etContent = v.findViewById(R.id.etContent);
+
+        NotesViewModelFactory factory =
+                ((MainActivity) requireActivity()).getNotesFactory();
+
+        vm = new ViewModelProvider(requireActivity(), factory)
+                .get(NotesViewModel.class);
 
         v.findViewById(R.id.btnSave).setOnClickListener(btn -> {
             String title = etTitle.getText().toString().trim();
