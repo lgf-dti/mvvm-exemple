@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MVVM Exemple</string>
+    <string name="welcome_title">Bienvenue</string>
+    <string name="add_note">Ajouter une note</string>
+    <string name="save">Sauvegarder</string>
+    <string name="title_hint">Titre</string>
+    <string name="content_hint">Contenu</string>
+</resources>

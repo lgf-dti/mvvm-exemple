@@ -7,9 +7,17 @@ import com.example.mvvm_exemple.model.Note;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
+@Singleton
 public class NotesRepository {
     private final MutableLiveData<List<Note>> notes = new MutableLiveData<>(new ArrayList<>());
+
+    @Inject
+    public NotesRepository() {
+        // Hilt will inject this constructor
+    }
 
     public LiveData<List<Note>> observeNotes() {
         return notes;

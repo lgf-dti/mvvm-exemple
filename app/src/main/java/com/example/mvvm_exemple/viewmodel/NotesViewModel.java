@@ -10,12 +10,18 @@ import com.example.mvvm_exemple.model.Note;
 import java.util.List;
 
 import java.util.Arrays;
+import javax.inject.Inject;
+import dagger.hilt.android.lifecycle.HiltViewModel;
 
+@HiltViewModel
 public class NotesViewModel extends ViewModel {
     private final NotesRepository repo;
 
+    @Inject
     public NotesViewModel(NotesRepository repo) {
         this.repo = repo;
+        // Load initial demo data
+        load();
     }
 
     public LiveData<List<Note>> getNotes() {
