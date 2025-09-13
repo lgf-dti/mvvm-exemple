@@ -15,11 +15,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mvvm_exemple.R;
-import com.example.mvvm_exemple.data.repository.NotesRepository;
-import com.example.mvvm_exemple.ui.main.MainActivity;
 import com.example.mvvm_exemple.viewmodel.NotesViewModel;
-import com.example.mvvm_exemple.viewmodel.NotesViewModelFactory;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class NotesListFragment extends Fragment {
 
     private NotesViewModel vm;
@@ -38,11 +38,8 @@ public class NotesListFragment extends Fragment {
         adapter = new NotesAdapter();
         rv.setAdapter(adapter);
 
-
-        NotesViewModelFactory factory = ((MainActivity) requireActivity()).getNotesFactory();
-
-
-        vm = new ViewModelProvider(requireActivity(), factory).get(NotesViewModel.class);
+        // Use Hilt to inject the ViewModel automatically
+        vm = new ViewModelProvider(requireActivity()).get(NotesViewModel.class);
 
         vm.getNotes().observe(getViewLifecycleOwner(), adapter::submitList);
 

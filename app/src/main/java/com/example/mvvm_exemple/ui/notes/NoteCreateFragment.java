@@ -14,10 +14,11 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.mvvm_exemple.R;
-import com.example.mvvm_exemple.ui.main.MainActivity;
 import com.example.mvvm_exemple.viewmodel.NotesViewModel;
-import com.example.mvvm_exemple.viewmodel.NotesViewModelFactory;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class NoteCreateFragment extends Fragment {
 
     private NotesViewModel vm;
@@ -34,11 +35,8 @@ public class NoteCreateFragment extends Fragment {
         etTitle = v.findViewById(R.id.etTitle);
         etContent = v.findViewById(R.id.etContent);
 
-        NotesViewModelFactory factory =
-                ((MainActivity) requireActivity()).getNotesFactory();
-
-        vm = new ViewModelProvider(requireActivity(), factory)
-                .get(NotesViewModel.class);
+        // Use Hilt to inject the ViewModel automatically
+        vm = new ViewModelProvider(requireActivity()).get(NotesViewModel.class);
 
         v.findViewById(R.id.btnSave).setOnClickListener(btn -> {
             String title = etTitle.getText().toString().trim();
