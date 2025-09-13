@@ -22,14 +22,7 @@ public class NotesViewModel extends ViewModel {
         return repo.observeNotes();
     }
 
-    /** Simule un "load" : par ex. chargement initial depuis une API */
-    public void load() {
-        List<Note> demo = Arrays.asList(
-                new Note("Bienvenue", "Ceci est votre première note."),
-                new Note("Astuce", "Ajoutez un titre et un texte, puis validez !")
-        );
-        repo.setAll(demo);
-    }
+
 
     public void add(String title, String content) {
         repo.add(new Note(title, content));

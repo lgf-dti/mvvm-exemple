@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.mvvm_exemple.model.Note;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class NotesRepository {
@@ -23,6 +24,15 @@ public class NotesRepository {
         List<Note> current = new ArrayList<>(notes.getValue());
         current.add(0, note);
         notes.setValue(current);
+    }
+
+    /** Simule un "load" : par ex. chargement initial depuis une API */
+    public void load() {
+        List<Note> demo = Arrays.asList(
+                new Note("Bienvenue", "Ceci est votre première note."),
+                new Note("Astuce", "Ajoutez un titre et un texte, puis validez !")
+        );
+        setAll(demo);
     }
 
     public void remove(Note note) {

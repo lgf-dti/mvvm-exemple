@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main); // héberge simplement le NavHostFragment
 
         NotesRepository repo = new NotesRepository();
+        repo.load();
         // Une seule Factory partagée
         notesFactory = new NotesViewModelFactory(repo);
     }
